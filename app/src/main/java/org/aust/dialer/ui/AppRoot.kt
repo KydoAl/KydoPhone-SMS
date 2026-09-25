@@ -38,6 +38,8 @@ import org.aust.dialer.SmsViewModel
 import org.aust.dialer.core.Prefs
 import org.aust.dialer.telecom.CallPlacer
 import org.aust.dialer.telecom.SimAccount
+import org.aust.dialer.ui.sms.ComposeScreen
+import org.aust.dialer.ui.sms.ThreadScreen
 
 @Composable
 fun AppRoot(vm: DialerViewModel, smsVm: SmsViewModel, prefs: Prefs, request: IntentRequest?, onConsumed: () -> Unit) {
@@ -131,7 +133,7 @@ fun AppRoot(vm: DialerViewModel, smsVm: SmsViewModel, prefs: Prefs, request: Int
             popExitTransition = { slideOutOfContainer(slideBack, tween(320)) + fadeOut(tween(320)) },
         ) {
             composable("setup") {
-                SetupScreen(vm, onDone = {
+                SetupScreen(vm, smsVm, onDone = {
                     prefs.setupDone = true
                     nav.navigate("home") { popUpTo("setup") { inclusive = true } }
                 })
